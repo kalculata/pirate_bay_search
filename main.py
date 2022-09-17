@@ -65,9 +65,9 @@ def search(q):
   
   selected = int(input(f"Select (1 - {len(data)}): ")) - 1
   id = int(data[selected]["id"])
-
-  if copy(get_link(id)):
-    print("Magnet link copied")
+  link = get_link(id)
+  if copy(link):
+    print("Copied in clip: ", link)
   
 
 search(entrer_q())
