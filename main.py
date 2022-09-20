@@ -49,18 +49,25 @@ def search(q):
 
   print("\n")
 
+  # formating data
+  for i in range(len(data)):
+    data[i]["size"] = int(data[i]["size"]) / 1024 / 1024
+    tmp = datetime.fromtimestamp(int(data[i]["added"]))
+    data[i]["added"] = tmp.strftime("%d/%m/%Y %X")
+
+  data.sort(key=lambda x: x["size"])
+
   for i in range(len(data)):
     name = data[i]["name"]
-    size = int(data[i]["size"]) / 1024 / 1024
-    _date = datetime.fromtimestamp(int(data[i]["added"]))
-    _date = _date.strftime("%d/%m/%Y %X")
+    size = data[i]["size"]
+    date = data[i]["added"]
 
     if(size > 1000):
         size = str(round(size / 1024, 1)) + " Go"
     else:
       size = str(round(size)) + " Mo"
 
-    print(f"{i + 1}) [size: {size}]  {name} ({_date})")
+    print(f"{i + 1}) [size: {size}]  {name} ({date})")
     print("--------------------------------------------------------------------------------------------------------")
   
   selected = int(input(f"Select (1 - {len(data)}): ")) - 1
