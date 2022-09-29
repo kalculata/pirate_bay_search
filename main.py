@@ -80,7 +80,7 @@ def search(q):
   selected = int(input(f"Select (1 - {len(data)}): ")) - 1
   id = int(data[selected]["id"])
   link = get_link(id)
-  copy(link):
+  copy(link)
   print("Link: ", link)
   
 
