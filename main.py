@@ -1,5 +1,6 @@
 from datetime import datetime
 import json
+from os import system
 import requests
 import sys
 
@@ -45,7 +46,7 @@ def copy(text):
   if(not android):
     pyperclip.copy(text)
   else:
-    os.syem.os()
+    system('termux-clipboard-set "{text}"')
 def search(q):
   url = "https://apibay.org/q.php?q=" + q
 
