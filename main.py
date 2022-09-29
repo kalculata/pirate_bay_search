@@ -1,7 +1,12 @@
 from datetime import datetime
 import json
 import requests
-import pyperclip
+import sys
+
+global android
+android =  hasattr(sys, 'getandroidapilevel')
+if(not android):
+  import pyperclip
 
 def format_name(name):
   return name.strip().replace(" ", "+").lower()
@@ -30,15 +35,17 @@ def entrer_q():
   return q
 
 def get_link(id):
-  print("Generating link...")
+  print("Getting link...")
   response = requests.get(f"https://apibay.org/t.php?id={id}")
   data = json.loads(response.content)
   return f"magnet:?xt=urn:btih:{data['info_hash']}&dn={data['name']}&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A6969%2Fannounce&tr=udp%3A%2F%2F9.rarbg.to%3A2710%2Fannounce&tr=udp%3A%2F%2F9.rarbg.me%3A2780%2Fannounce&tr=udp%3A%2F%2F9.rarbg.to%3A2730%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=http%3A%2F%2Fp4p.arenabg.com%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Ftracker.tiny-vps.com%3A6969%2Fannounce&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce"
 
 def copy(text):
-  pyperclip.copy(text)
-  return True
-
+  print("coping the link...")
+  if(not android):
+    pyperclip.copy(text)
+  else:
+    os.syem.os()
 def search(q):
   url = "https://apibay.org/q.php?q=" + q
 
@@ -73,8 +80,8 @@ def search(q):
   selected = int(input(f"Select (1 - {len(data)}): ")) - 1
   id = int(data[selected]["id"])
   link = get_link(id)
-  if copy(link):
-    print("Copied in clip: ", link)
+  copy(link):
+  print("Link: ", link)
   
 
 search(entrer_q())
