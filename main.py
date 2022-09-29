@@ -46,7 +46,7 @@ def copy(text):
   if(not android):
     pyperclip.copy(text)
   else:
-    system('termux-clipboard-set "{text}"')
+    system(f'termux-clipboard-set "{text}"')
 def search(q):
   url = "https://apibay.org/q.php?q=" + q
 
