@@ -28,15 +28,20 @@ def menu():
   print("3. Quit")
 
 def complete_serie_title(title):
-  saison = int(input("Saison: "))
-      
-  if saison > 0:
-    title   = title + "s" + str(saison)
-    episode = int(input("Episode"))
+  saison = input("Saison: ")
+  
+  if(len(saison) > 0):
+    saison    = int(saison)
+    if saison > 0:
+      s       = "0" + str(saison) if saison < 10 else str(saison)
+      title   = title + "+s" + str(s)
+      episode = input("Episode: ")
 
-    if episode > 0:
-      e     = "0" + str(episode) if episode < 10 else str(episode)
-      title = title + "e" + e
+      if(len(episode) > 0):
+        episode = int(episode)
+        if episode > 0:
+          e     = "0" + str(episode) if episode < 10 else str(episode)
+          title = title + "e" + e
 
   return title
 
